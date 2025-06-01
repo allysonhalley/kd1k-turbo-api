@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface DependentService {
 
-    DependentDTO createDependent(Long personnelId, DependentDTO dependentDTO);
+    DependentDTO createDependent(Long peopleId, DependentDTO dependentDTO);
 
     DependentDTO getDependentById(Long id);
 
-    List<DependentDTO> getDependentsByPersonnel(Long personnelId);
+    List<DependentDTO> getDependentsByPeople(Long peopleId);
 
     DependentDTO updateDependent(Long id, DependentDTO dependentDTO);
 

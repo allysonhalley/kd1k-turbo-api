@@ -30,5 +30,5 @@ public class MilitaryRank extends BaseEntity {
     private String branch;
 
     @OneToMany(mappedBy = "rank", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<MilitaryPersonnel> personnel = new ArrayList<>();
+    private List<MilitaryPeople> people = new ArrayList<>();
 }

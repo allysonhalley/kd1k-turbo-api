@@ -39,6 +39,6 @@ public class Address extends BaseEntity {
     private String state;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personnel_id", nullable = false)
-    private MilitaryPersonnel militaryPersonnel;
+    @JoinColumn(name = "people_id", nullable = false)
+    private MilitaryPeople militaryPeople;
 }

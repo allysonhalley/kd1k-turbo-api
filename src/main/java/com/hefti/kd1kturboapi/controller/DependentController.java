@@ -25,13 +25,13 @@ public class DependentController {
         this.dependentService = dependentService;
     }
 
-    @PostMapping("/personnel/{personnelId}/dependents")
-    @Operation(summary = "Create new dependent", description = "Creates a new dependent record associated with military personnel")
+    @PostMapping("/people/{peopleId}/dependents")
+    @Operation(summary = "Create new dependent", description = "Creates a new dependent record associated with military people")
     @ApiResponse(responseCode = "201", description = "Dependent created successfully")
     public ResponseEntity<DependentDTO> createDependent(
-            @PathVariable Long personnelId,
+            @PathVariable Long peopleId,
             @Valid @RequestBody DependentDTO dependentDTO) {
-        DependentDTO createdDependent = dependentService.createDependent(personnelId, dependentDTO);
+        DependentDTO createdDependent = dependentService.createDependent(peopleId, dependentDTO);
         return new ResponseEntity<>(createdDependent, HttpStatus.CREATED);
     }
 
@@ -44,11 +44,11 @@ public class DependentController {
         return ResponseEntity.ok(dependentDTO);
     }
 
-    @GetMapping("/personnel/{personnelId}/dependents")
-    @Operation(summary = "List dependents by personnel", description = "Returns a list of dependents of military personnel")
+    @GetMapping("/people/{peopleId}/dependents")
+    @Operation(summary = "List dependents by people", description = "Returns a list of dependents of military people")
     @ApiResponse(responseCode = "200", description = "List of dependents returned successfully")
-    public ResponseEntity<List<DependentDTO>> getDependentsByPersonnel(@PathVariable Long personnelId) {
-        List<DependentDTO> dependents = dependentService.getDependentsByPersonnel(personnelId);
+    public ResponseEntity<List<DependentDTO>> getDependentsByPeople(@PathVariable Long peopleId) {
+        List<DependentDTO> dependents = dependentService.getDependentsByPeople(peopleId);
         return ResponseEntity.ok(dependents);
     }
 

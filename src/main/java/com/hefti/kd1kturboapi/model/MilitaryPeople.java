@@ -15,8 +15,8 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
-@Table(name = "military_personnel")
-public class MilitaryPersonnel extends BaseEntity {
+@Table(name = "military_people")
+public class MilitaryPeople extends BaseEntity {
 
     @Column(name = "full_name", nullable = false)
     private String fullName;
@@ -102,45 +102,45 @@ public class MilitaryPersonnel extends BaseEntity {
     @JoinColumn(name = "rank_id")
     private MilitaryRank rank;
 
-    @OneToOne(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private MilitaryIdentity militaryIdentity;
 
-    @OneToOne(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ServiceHistory serviceHistory;
 
-    @OneToOne(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Parents parents;
 
-    @OneToOne(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Education education;
 
-    @OneToOne(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Address address;
 
-    @OneToOne(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private BankInfo bankInfo;
 
-    @OneToOne(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private VoterInfo voterInfo;
 
-    @OneToOne(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private DriversLicense driversLicense;
 
-    @OneToOne(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private BoatLicense boatLicense;
 
-    @OneToMany(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Firearm> firearms = new ArrayList<>();
 
-    @OneToOne(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ContactInfo contactInfo;
 
-    @OneToMany(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Dependent> dependents = new ArrayList<>();
 
-    @OneToMany(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Qualification> qualifications = new ArrayList<>();
 
-    @OneToOne(mappedBy = "militaryPersonnel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "militaryPeople", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private WorkLocation workLocation;
 }

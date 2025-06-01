@@ -23,6 +23,6 @@ public class Dependent extends BaseEntity {
     private LocalDate birthDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personnel_id", nullable = false)
-    private MilitaryPersonnel militaryPersonnel;
+    @JoinColumn(name = "people_id", nullable = false)
+    private MilitaryPeople militaryPeople;
 }

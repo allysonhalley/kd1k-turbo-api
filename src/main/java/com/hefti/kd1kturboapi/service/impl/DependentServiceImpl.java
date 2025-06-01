@@ -3,9 +3,9 @@ package com.hefti.kd1kturboapi.service.impl;
 import com.hefti.kd1kturboapi.dto.DependentDTO;
 import com.hefti.kd1kturboapi.exception.ResourceNotFoundException;
 import com.hefti.kd1kturboapi.model.Dependent;
-import com.hefti.kd1kturboapi.model.MilitaryPersonnel;
+import com.hefti.kd1kturboapi.model.MilitaryPeople;
 import com.hefti.kd1kturboapi.repository.DependentRepository;
-import com.hefti.kd1kturboapi.repository.MilitaryPersonnelRepository;
+import com.hefti.kd1kturboapi.repository.MilitaryPeopleRepository;
 import com.hefti.kd1kturboapi.service.DependentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,27 +18,27 @@ import java.util.stream.Collectors;
 public class DependentServiceImpl implements DependentService {
 
     private final DependentRepository dependentRepository;
-    private final MilitaryPersonnelRepository militaryPersonnelRepository;
+    private final MilitaryPeopleRepository militaryPeopleRepository;
 
     @Autowired
     public DependentServiceImpl(DependentRepository dependentRepository,
-                                MilitaryPersonnelRepository militaryPersonnelRepository) {
+                                MilitaryPeopleRepository militaryPeopleRepository) {
         this.dependentRepository = dependentRepository;
-        this.militaryPersonnelRepository = militaryPersonnelRepository;
+        this.militaryPeopleRepository = militaryPeopleRepository;
     }
 
     @Override
     @Transactional
-    public DependentDTO createDependent(Long personnelId, DependentDTO dependentDTO) {
-        // Find the military personnel by ID
-        MilitaryPersonnel personnel = militaryPersonnelRepository.findById(personnelId)
-                .orElseThrow(() -> new ResourceNotFoundException("Military Personnel", "id", personnelId));
+    public DependentDTO createDependent(Long peopleId, DependentDTO dependentDTO) {
+        // Find the military people by ID
+        MilitaryPeople people = militaryPeopleRepository.findById(peopleId)
+                .orElseThrow(() -> new ResourceNotFoundException("Military People", "id", peopleId));
 
         // Convert DTO to entity
         Dependent dependent = new Dependent();
         dependent.setName(dependentDTO.name());
         dependent.setBirthDate(dependentDTO.birthDate());
-        dependent.setMilitaryPersonnel(personnel);
+        dependent.setMilitaryPeople(people);
 
         // Save to database
         Dependent savedDependent = dependentRepository.save(dependent);
@@ -58,8 +58,8 @@ public class DependentServiceImpl implements DependentService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<DependentDTO> getDependentsByPersonnel(Long personnelId) {
-        List<Dependent> dependents = dependentRepository.findByMilitaryPersonnelId(personnelId);
+    public List<DependentDTO> getDependentsByPeople(Long peopleId) {
+        List<Dependent> dependents = dependentRepository.findByMilitaryPeopleId(peopleId);
 
         return dependents.stream()
                 .map(this::convertToDTO)

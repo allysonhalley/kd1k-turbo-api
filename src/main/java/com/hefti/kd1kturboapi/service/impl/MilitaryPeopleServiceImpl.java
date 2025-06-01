@@ -4,7 +4,7 @@ import com.hefti.kd1kturboapi.dto.*;
 import com.hefti.kd1kturboapi.exception.ResourceNotFoundException;
 import com.hefti.kd1kturboapi.model.*;
 import com.hefti.kd1kturboapi.repository.*;
-import com.hefti.kd1kturboapi.service.MilitaryPersonnelService;
+import com.hefti.kd1kturboapi.service.MilitaryPeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,148 +13,148 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class MilitaryPersonnelServiceImpl implements MilitaryPersonnelService {
+public class MilitaryPeopleServiceImpl implements MilitaryPeopleService {
 
-    private final MilitaryPersonnelRepository militaryPersonnelRepository;
+    private final MilitaryPeopleRepository militaryPeopleRepository;
     private final MilitaryRankRepository militaryRankRepository;
 
     @Autowired
-    public MilitaryPersonnelServiceImpl(MilitaryPersonnelRepository militaryPersonnelRepository,
+    public MilitaryPeopleServiceImpl(MilitaryPeopleRepository militaryPeopleRepository,
                                         MilitaryRankRepository militaryRankRepository) {
-        this.militaryPersonnelRepository = militaryPersonnelRepository;
+        this.militaryPeopleRepository = militaryPeopleRepository;
         this.militaryRankRepository = militaryRankRepository;
     }
 
     @Override
     @Transactional
-    public MilitaryPersonnelDTO createPersonnel(MilitaryPersonnelDTO personnelDTO) {
+    public MilitaryPeopleDTO createPeople(MilitaryPeopleDTO peopleDTO) {
         // Convert DTO to entity
-        MilitaryPersonnel personnel = convertToEntity(personnelDTO);
+        MilitaryPeople people = convertToEntity(peopleDTO);
 
         // Save to database
-        MilitaryPersonnel savedPersonnel = militaryPersonnelRepository.save(personnel);
+        MilitaryPeople savedPeople = militaryPeopleRepository.save(people);
 
         // Convert saved entity back to DTO
-        return convertToDTO(savedPersonnel);
+        return convertToDTO(savedPeople);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public MilitaryPersonnelDTO getPersonnelById(Long id) {
-        MilitaryPersonnel personnel = militaryPersonnelRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Military Personnel", "id", id));
+    public MilitaryPeopleDTO getPeopleById(Long id) {
+        MilitaryPeople people = militaryPeopleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Military People", "id", id));
 
-        return convertToDTO(personnel);
+        return convertToDTO(people);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public MilitaryPersonnelDTO getPersonnelByCpf(String cpf) {
-        MilitaryPersonnel personnel = militaryPersonnelRepository.findByCpf(cpf)
-                .orElseThrow(() -> new ResourceNotFoundException("Military Personnel", "cpf", cpf));
+    public MilitaryPeopleDTO getPeopleByCpf(String cpf) {
+        MilitaryPeople people = militaryPeopleRepository.findByCpf(cpf)
+                .orElseThrow(() -> new ResourceNotFoundException("Military People", "cpf", cpf));
 
-        return convertToDTO(personnel);
+        return convertToDTO(people);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<MilitaryPersonnelDTO> getAllPersonnel() {
-        List<MilitaryPersonnel> personnelList = militaryPersonnelRepository.findAll();
+    public List<MilitaryPeopleDTO> getAllPeople() {
+        List<MilitaryPeople> peopleList = militaryPeopleRepository.findAll();
 
-        return personnelList.stream()
+        return peopleList.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<MilitaryPersonnelDTO> getPersonnelByRank(Long rankId) {
-        List<MilitaryPersonnel> personnelList = militaryPersonnelRepository.findByRankId(rankId);
+    public List<MilitaryPeopleDTO> getPeopleByRank(Long rankId) {
+        List<MilitaryPeople> peopleList = militaryPeopleRepository.findByRankId(rankId);
 
-        return personnelList.stream()
+        return peopleList.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
-    public MilitaryPersonnelDTO updatePersonnel(Long id, MilitaryPersonnelDTO personnelDTO) {
-        // Check if personnel exists
-        MilitaryPersonnel personnel = militaryPersonnelRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Military Personnel", "id", id));
+    public MilitaryPeopleDTO updatePeople(Long id, MilitaryPeopleDTO peopleDTO) {
+        // Check if people exists
+        MilitaryPeople people = militaryPeopleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Military People", "id", id));
 
         // Update entity fields
-        updateEntityFields(personnel, personnelDTO);
+        updateEntityFields(people, peopleDTO);
 
         // Save changes
-        MilitaryPersonnel updatedPersonnel = militaryPersonnelRepository.save(personnel);
+        MilitaryPeople updatedPeople = militaryPeopleRepository.save(people);
 
         // Convert updated entity to DTO
-        return convertToDTO(updatedPersonnel);
+        return convertToDTO(updatedPeople);
     }
 
     @Override
     @Transactional
-    public void deletePersonnel(Long id) {
-        // Check if personnel exists
-        MilitaryPersonnel personnel = militaryPersonnelRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Military Personnel", "id", id));
+    public void deletePeople(Long id) {
+        // Check if people exists
+        MilitaryPeople people = militaryPeopleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Military People", "id", id));
 
-        // Delete personnel
-        militaryPersonnelRepository.delete(personnel);
+        // Delete people
+        militaryPeopleRepository.delete(people);
     }
 
     // Helper methods to convert between entity and DTO
 
-    private MilitaryPersonnel convertToEntity(MilitaryPersonnelDTO dto) {
+    private MilitaryPeople convertToEntity(MilitaryPeopleDTO dto) {
         if (dto == null) {
             return null;
         }
 
-        MilitaryPersonnel personnel = new MilitaryPersonnel();
+        MilitaryPeople people = new MilitaryPeople();
 
         // Fill basic fields
-        personnel.setId(dto.id());
-        personnel.setFullName(dto.fullName());
-        personnel.setWarName(dto.warName());
-        personnel.setCpf(dto.cpf());
-        personnel.setBirthDate(dto.birthDate());
-        personnel.setBirthMonth(dto.birthMonth());
-        personnel.setMaritalStatus(dto.maritalStatus());
-        personnel.setGender(dto.gender());
-        personnel.setReligion(dto.religion());
-        personnel.setBloodType(dto.bloodType());
-        personnel.setRhFactor(dto.rhFactor());
-        personnel.setHeadSize(dto.headSize());
-        personnel.setShoeSize(dto.shoeSize());
-        personnel.setBootSize(dto.bootSize());
-        personnel.setShirtSize(dto.shirtSize());
-        personnel.setPantsSize(dto.pantsSize());
-        personnel.setShortsSize(dto.shortsSize());
-        personnel.setSwimwearSize(dto.swimwearSize());
-        personnel.setSwimTrunksSize(dto.swimTrunksSize());
-        personnel.setOrganDonor(dto.organDonor());
-        personnel.setBloodDonor(dto.bloodDonor());
-        personnel.setCasMember(dto.casMember());
-        personnel.setSismepeUser(dto.sismepeUser());
-        personnel.setHasAccidentCertificate(dto.hasAccidentCertificate());
-        personnel.setHasChronicDisease(dto.hasChronicDisease());
-        personnel.setControlledMedication(dto.controlledMedication());
-        personnel.setHasAllergies(dto.hasAllergies());
+        people.setId(dto.id());
+        people.setFullName(dto.fullName());
+        people.setWarName(dto.warName());
+        people.setCpf(dto.cpf());
+        people.setBirthDate(dto.birthDate());
+        people.setBirthMonth(dto.birthMonth());
+        people.setMaritalStatus(dto.maritalStatus());
+        people.setGender(dto.gender());
+        people.setReligion(dto.religion());
+        people.setBloodType(dto.bloodType());
+        people.setRhFactor(dto.rhFactor());
+        people.setHeadSize(dto.headSize());
+        people.setShoeSize(dto.shoeSize());
+        people.setBootSize(dto.bootSize());
+        people.setShirtSize(dto.shirtSize());
+        people.setPantsSize(dto.pantsSize());
+        people.setShortsSize(dto.shortsSize());
+        people.setSwimwearSize(dto.swimwearSize());
+        people.setSwimTrunksSize(dto.swimTrunksSize());
+        people.setOrganDonor(dto.organDonor());
+        people.setBloodDonor(dto.bloodDonor());
+        people.setCasMember(dto.casMember());
+        people.setSismepeUser(dto.sismepeUser());
+        people.setHasAccidentCertificate(dto.hasAccidentCertificate());
+        people.setHasChronicDisease(dto.hasChronicDisease());
+        people.setControlledMedication(dto.controlledMedication());
+        people.setHasAllergies(dto.hasAllergies());
 
         // Set rank
         if (dto.rank() != null && dto.rank().id() != null) {
             MilitaryRank rank = militaryRankRepository.findById(dto.rank().id())
                     .orElseThrow(() -> new ResourceNotFoundException("Military Rank", "id", dto.rank().id()));
-            personnel.setRank(rank);
+            people.setRank(rank);
         }
 
         // Other relationships would be configured here...
 
-        return personnel;
+        return people;
     }
 
-    private void updateEntityFields(MilitaryPersonnel entity, MilitaryPersonnelDTO dto) {
+    private void updateEntityFields(MilitaryPeople entity, MilitaryPeopleDTO dto) {
         if (dto == null) {
             return;
         }
@@ -196,7 +196,7 @@ public class MilitaryPersonnelServiceImpl implements MilitaryPersonnelService {
         // Other relationships would be updated here...
     }
 
-    private MilitaryPersonnelDTO convertToDTO(MilitaryPersonnel entity) {
+    private MilitaryPeopleDTO convertToDTO(MilitaryPeople entity) {
         if (entity == null) {
             return null;
         }
@@ -214,7 +214,7 @@ public class MilitaryPersonnelServiceImpl implements MilitaryPersonnelService {
         }
 
         // Use Builder pattern for the complex DTO
-        return MilitaryPersonnelDTO.builder()
+        return MilitaryPeopleDTO.builder()
                 .id(entity.getId())
                 .fullName(entity.getFullName())
                 .warName(entity.getWarName())

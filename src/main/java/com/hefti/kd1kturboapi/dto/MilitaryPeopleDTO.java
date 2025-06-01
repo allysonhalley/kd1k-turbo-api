@@ -3,7 +3,7 @@ package com.hefti.kd1kturboapi.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-public record MilitaryPersonnelDTO(
+public record MilitaryPeopleDTO(
         Long id,
         String fullName,
         String warName,
@@ -140,8 +140,8 @@ public record MilitaryPersonnelDTO(
         public Builder qualifications(List<QualificationDTO> qualifications) { this.qualifications = qualifications; return this; }
         public Builder workLocation(WorkLocationDTO workLocation) { this.workLocation = workLocation; return this; }
 
-        public MilitaryPersonnelDTO build() {
-            return new MilitaryPersonnelDTO(
+        public MilitaryPeopleDTO build() {
+            return new MilitaryPeopleDTO(
                     id, fullName, warName, cpf, birthDate, birthMonth, maritalStatus, gender, religion,
                     bloodType, rhFactor, headSize, shoeSize, bootSize, shirtSize, pantsSize, shortsSize,
                     swimwearSize, swimTrunksSize, organDonor, bloodDonor, casMember, sismepeUser,

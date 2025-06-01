@@ -27,6 +27,6 @@ public class Education extends BaseEntity {
     private String period;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personnel_id", nullable = false)
-    private MilitaryPersonnel militaryPersonnel;
+    @JoinColumn(name = "people_id", nullable = false)
+    private MilitaryPeople militaryPeople;
 }
