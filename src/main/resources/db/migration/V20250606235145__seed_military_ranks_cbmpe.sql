@@ -1,0 +1,13 @@
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (1, 'Sd BM', 'Soldado Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (2, 'Cb BM', 'Cabo Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (3, '3º Sgt BM', '3º Sargento Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (4, '2º Sgt BM', '2º Sargento Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (5, '1º Sgt BM', '1º Sargento Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (6, 'Sub Ten BM', 'Subtenente Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (7, 'Asp BM', 'Aspirante a Oficial Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (8, '2º Ten BM', '2º Tenente Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (9, '1º Ten BM', '1º Tenente Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (10, 'Cap BM', 'Capitão Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (11, 'Maj BM', 'Major Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (12, 'Ten Cel BM', 'Tenente Coronel Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
+INSERT INTO military_rank (number, rank_abbreviation, rank_name, branch, created_at, updated_at) VALUES (13, 'Cel BM', 'Coronel Bombeiro Militar', 'CBMPE', CURRENT_TIMESTAMP,  CURRENT_TIMESTAMP);
