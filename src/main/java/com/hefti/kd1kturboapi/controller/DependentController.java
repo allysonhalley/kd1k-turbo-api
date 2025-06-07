@@ -18,12 +18,8 @@ import java.util.List;
 @Tag(name = "Dependent", description = "API for managing dependents")
 public class DependentController {
 
-    private final DependentService dependentService;
-
     @Autowired
-    public DependentController(DependentService dependentService) {
-        this.dependentService = dependentService;
-    }
+    private DependentService dependentService;
 
     @PostMapping("/people/{peopleId}/dependents")
     @Operation(summary = "Create new dependent", description = "Creates a new dependent record associated with military people")

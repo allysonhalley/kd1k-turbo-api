@@ -18,12 +18,8 @@ import java.util.List;
 @Tag(name = "Military People", description = "API for managing military people")
 public class MilitaryPeopleController {
 
-    private final MilitaryPeopleService militaryPeopleService;
-
     @Autowired
-    public MilitaryPeopleController(MilitaryPeopleService militaryPeopleService) {
-        this.militaryPeopleService = militaryPeopleService;
-    }
+    private MilitaryPeopleService militaryPeopleService;
 
     @PostMapping
     @Operation(summary = "Create new military people", description = "Creates a new military people record")
