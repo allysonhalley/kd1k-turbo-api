@@ -10,8 +10,8 @@ services:
       - "8081:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/kd1k_db
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_DATASOURCE_USERNAME=user_kd1k
+      - SPRING_DATASOURCE_PASSWORD=keypass
     networks:
       - kd1k-network
 
@@ -21,8 +21,8 @@ services:
     ports:
       - "5433:5432"
     environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=keypass
+      - POSTGRES_USER=user_kd1k
       - POSTGRES_DB=kd1k_db
     volumes:
       - postgres-data:/var/lib/postgresql/data
