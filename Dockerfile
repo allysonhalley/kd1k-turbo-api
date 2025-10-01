@@ -1,27 +1,45 @@
-# Etapa de construção
-FROM openjdk:17-jdk-slim as build
-LABEL authors="allysonhalley"
-WORKDIR /workspace/app
-
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
-COPY src src
-
-RUN ./mvnw clean package -DskipTests
-
-# Etapa de produção
+#DOCKER FILE TO RENDER DEPLOIY
 FROM openjdk:17-jdk-slim
-WORKDIR /app
-VOLUME /tmp
+LABEL authors="allysonhalley"
 
-# Copia o fat jar gerado para a imagem final
-COPY --from=build /workspace/app/target/*.jar app.jar
+RUN apt-get update && apt-get install openjdk-17-jdk -y
+COPY . .
 
-# Expõe a porta padrão do Spring Boot
+RUN apt-get install maven -y
+RUN mvn clean install
+
+FROM openjdk:17-jdk-slim
+
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY --from=build /target/kd1k-api-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
+
+
+## Etapa de construção
+#FROM openjdk:17-jdk-slim as build
+#LABEL authors="allysonhalley"
+#WORKDIR /workspace/app
+#
+#COPY mvnw .
+#COPY .mvn .mvn
+#COPY pom.xml .
+#COPY src src
+#
+#RUN ./mvnw clean package -DskipTests
+#
+## Etapa de produção
+#FROM openjdk:17-jdk-slim
+#WORKDIR /app
+#VOLUME /tmp
+#
+## Copia o fat jar gerado para a imagem final
+#COPY --from=build /workspace/app/target/*.jar app.jar
+#
+## Expõe a porta padrão do Spring Boot
+#EXPOSE 8080
+#
+#ENTRYPOINT ["java", "-jar", "app.jar"]
 
 #FROM openjdk:17-jdk-slim
 #VOLUME /tmp
