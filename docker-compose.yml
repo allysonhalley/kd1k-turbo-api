@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     build: .
@@ -31,6 +29,7 @@ services:
 
 volumes:
   postgres-data:
+
 
 networks:
   kd1k-network:

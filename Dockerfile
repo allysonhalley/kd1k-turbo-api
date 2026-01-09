@@ -1,50 +1,20 @@
-#DOCKER FILE TO RENDER DEPLOIY
-FROM openjdk:17-jdk-slim
-LABEL authors="allysonhalley"
+# Stage 1: Build using Maven image to ensure dependencies are handled correctly
+FROM maven:3.9.6-eclipse-temurin-17 AS build
+WORKDIR /app
 
-RUN apt-get update && apt-get install openjdk-17-jdk -y
+# Copy the project files
 COPY . .
 
-RUN apt-get install maven -y
-RUN mvn clean install
+# Build the application skipping tests to speed up
+RUN mvn clean package -DskipTests
 
-FROM openjdk:17-jdk-slim
+# Stage 2: Runtime image
+FROM eclipse-temurin:17-jre-jammy
+WORKDIR /app
+
+# Copy the built jar from the build stage
+# Using wildcard to match any version
+COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
-
-COPY --from=build /target/kd1k-api-1.0.0.jar app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
-
-
-## Etapa de construção
-#FROM openjdk:17-jdk-slim as build
-#LABEL authors="allysonhalley"
-#WORKDIR /workspace/app
-#
-#COPY mvnw .
-#COPY .mvn .mvn
-#COPY pom.xml .
-#COPY src src
-#
-#RUN ./mvnw clean package -DskipTests
-#
-## Etapa de produção
-#FROM openjdk:17-jdk-slim
-#WORKDIR /app
-#VOLUME /tmp
-#
-## Copia o fat jar gerado para a imagem final
-#COPY --from=build /workspace/app/target/*.jar app.jar
-#
-## Expõe a porta padrão do Spring Boot
-#EXPOSE 8080
-#
-#ENTRYPOINT ["java", "-jar", "app.jar"]
-
-#FROM openjdk:17-jdk-slim
-#VOLUME /tmp
-#ARG DEPENDENCY=/workspace/app/target/dependency
-#COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
-#COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
-#COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
-#ENTRYPOINT ["java","-cp","app:app/lib/*","com.kd1k.api.Kd1kApiApplication"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
